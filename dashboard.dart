@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-// ignore: camel_case_types
 class Dashboard_page extends StatefulWidget {
   static const String routeName = '/Dashboard_page';
   const Dashboard_page({super.key});
@@ -10,14 +9,14 @@ class Dashboard_page extends StatefulWidget {
   State<Dashboard_page> createState() => _Dashboard_pageState();
 }
 
-// ignore: camel_case_types
+
 class _Dashboard_pageState extends State<Dashboard_page> {
   TextEditingController voucherController = TextEditingController();
 
   bool voucherAktif = false;
   bool isVisible = true;
   bool isvisible = true;
-  //counter (untuk angka pemesanan)
+
   int counter1 = 0;
   int counter2 = 0;
   int counter3 = 0;
@@ -748,7 +747,149 @@ class _Dashboard_pageState extends State<Dashboard_page> {
               ),
             ),
           ),
-         
+          Visibility(
+            visible: !isVisible,
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color(0x499C9C9C),
+                    blurRadius: 2,
+                    offset: Offset(0, 0),
+                    spreadRadius: 1,
+                  ),
+                ],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    left: 10, right: 10, top: 10, bottom: 10),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.confirmation_num_sharp,
+                          size: 30,
+                          color: Colors.brown,
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              'Punya kode voucher?',
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                                color: Colors.brown,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const Spacer(),
+                        IconButton(
+                            onPressed: () {
+                              setState(() {
+                                isVisible = !isVisible;
+                              });
+                            },
+                            icon: const Icon(
+                              Icons.close,
+                              color: Colors.brown,
+                              size: 25,
+                            )),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          'Masukkan kode voucher disini',
+                          style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                            color: Colors.brown,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Column(
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          child: TextField(
+                            controller: voucherController,
+                            style: const TextStyle(
+                              fontSize: 15,
+                            ),
+                            decoration: const InputDecoration(
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.black),
+                              ),
+                              hintText: 'coffe',
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        if (voucherController.text == 'coffe') {
+                          diskon = 50;
+                          voucherAktif = true;
+                        } else if (voucherController.text == Null ||
+                            voucherController.text == '') {
+                          diskon = 0;
+                          voucherAktif = false;
+                        }
+                        setState(() {
+                          isVisible = !isVisible;
+                        });
+                      },
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Container(
+                              height: 35,
+                              width: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                                color: Colors.brown,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  "Validasi Voucher",
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 15,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
